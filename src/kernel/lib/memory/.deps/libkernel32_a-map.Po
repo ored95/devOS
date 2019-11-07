@@ -1,0 +1,40 @@
+memory/libkernel32_a-map.o: memory/map.c \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/asm.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h \
+ /home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h \
+ /home/sa/Desktop/AnnOSTemp/src/stdlib/string.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/map.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h \
+ /home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/asm.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h:
+
+/home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
+
+/home/sa/Desktop/AnnOSTemp/src/stdlib/string.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/map.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h:
+
+/home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h:

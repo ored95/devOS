@@ -1,0 +1,12 @@
+libstd32_a-string.o: string.c \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h string.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h:
+
+string.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:

@@ -1,0 +1,16 @@
+../lib/disk/bootloader-ata.o: ../lib/disk/ata.c \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/asm.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/disk/ata.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/asm.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/disk/ata.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h:

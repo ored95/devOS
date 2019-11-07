@@ -1,0 +1,4 @@
+bootloader-boot.o: boot.S \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h:

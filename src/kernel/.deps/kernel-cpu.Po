@@ -1,0 +1,27 @@
+kernel-cpu.o: cpu.c /home/sa/Desktop/AnnOSTemp/src/kernel/cpu.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/task.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h \
+ /home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h \
+ /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h \
+ /home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/cpu.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/task.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h:
+
+/home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h:
+
+/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+
+/home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h:
