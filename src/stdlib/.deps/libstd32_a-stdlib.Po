@@ -1,10 +1,9 @@
-libstd32_a-stdlib.o: stdlib.c \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/stdlib.h \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/string.h \
+libstd32_a-stdlib.o: stdlib.c /home/sa/Desktop/devOS/src/stdlib/stdlib.h \
+ /home/sa/Desktop/devOS/src/stdlib/string.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/stdlib.h:
+/home/sa/Desktop/devOS/src/stdlib/stdlib.h:
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/string.h:
+/home/sa/Desktop/devOS/src/stdlib/string.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:

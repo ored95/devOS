@@ -171,12 +171,12 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/sa/Desktop/devOS/src/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/missing autoconf
-AUTOHEADER = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/missing autoheader
-AUTOMAKE = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/missing automake-1.15
+AUTOCONF = ${SHELL} /home/sa/Desktop/devOS/src/missing autoconf
+AUTOHEADER = ${SHELL} /home/sa/Desktop/devOS/src/missing autoheader
+AUTOMAKE = ${SHELL} /home/sa/Desktop/devOS/src/missing automake-1.15
 AWK = mawk
 CC = gcc
 CCAS = gcc
@@ -185,7 +185,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=1
+COMMON_CPPFLAGS = -DLAB=3
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -208,7 +208,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/missing makeinfo
+MAKEINFO = ${SHELL} /home/sa/Desktop/devOS/src/missing makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJCOPY = objcopy
 OBJEXT = o
@@ -227,10 +227,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
-abs_builddir = /home/sa/Desktop/AnnOSTemp/src/kernel/boot
-abs_srcdir = /home/sa/Desktop/AnnOSTemp/src/kernel/boot
-abs_top_builddir = /home/sa/Desktop/AnnOSTemp/src
-abs_top_srcdir = /home/sa/Desktop/AnnOSTemp/src
+abs_builddir = /home/sa/Desktop/devOS/src/kernel/boot
+abs_srcdir = /home/sa/Desktop/devOS/src/kernel/boot
+abs_top_builddir = /home/sa/Desktop/devOS/src
+abs_top_srcdir = /home/sa/Desktop/devOS/src
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -249,7 +249,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/sa/Desktop/AnnOSTemp/src/install-sh
+install_sh = ${SHELL} /home/sa/Desktop/devOS/src/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -271,7 +271,7 @@ top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
 bootloader_SOURCES = boot.S main.c ../lib/disk/ata.c
-bootloader_CPPFLAGS = -DLAB=1 -I$(abs_top_srcdir)
+bootloader_CPPFLAGS = -DLAB=3 -I$(abs_top_srcdir)
 bootloader_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32 -Os
 bootloader_CCASFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32 -Os
 bootloader_LDFLAGS = -ggdb3 -Wl,--entry=boot_entry -Wl,-Ttext -Wl,0x7c00

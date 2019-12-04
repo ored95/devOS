@@ -49,6 +49,9 @@ void kernel_init_mmap(void)
 
 	// Convert physical addresses from struct config into virtual one
 	// LAB3 code here
+	config->gdt.ptr = VADDR(config->gdt.ptr);
+	config->pml4.ptr = VADDR(config->pml4.ptr);
+	config->pages.ptr = VADDR(config->pages.ptr);
 
 	//Reinitialize pml4 pointer
 	cpu->pml4 = config->pml4.ptr;
@@ -58,6 +61,8 @@ void kernel_init_mmap(void)
 	// use config param
 	state.free = (struct mmap_free_pages){ NULL };
 	// LAB3 code here
+	state.pages_cnt = config->pages_cnt;
+	state.pages = config->pages.ptr;
 	mmap_init(&state);
 
 	sgdt(gdtr);
@@ -78,7 +83,22 @@ void kernel_init_mmap(void)
 		// Pages inside free list may has ref counter > 0, this means
 		// that page is used, but reuse is allowed.
 
-		(void)pages32;
+		//(void)pages32;
+		struct page *p = &state.pages[i];
+		uint64_t links = pages32[i].links;
+		uint32_t rc = pages32[i].ref;
+
+		memset(p, 0, sizeof(*p));
+		p->ref = rc;
+
+		if (links == 0)	// Page in not inside free list
+		{
+			used_pages++;
+			continue;
+		}
+		// Pages inside free list may has ref counter > 0, this means
+		// that page is used, but reuse is allowed.
+		LIST_INSERT_HEAD(&state.free, p, link);
 	}
 
 	terminal_printf("Pages stat: used: `%u', free: `%u'\n",

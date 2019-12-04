@@ -1,4 +1,3 @@
-bootloader-boot.o: boot.S \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h
+bootloader-boot.o: boot.S /home/sa/Desktop/devOS/src/kernel/misc/gdt.h
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h:
+/home/sa/Desktop/devOS/src/kernel/misc/gdt.h:

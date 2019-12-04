@@ -93,24 +93,20 @@ something_bad:
 }
 
 // LAB2 Instruction:
-// - use `free_memory' as a pointer to memory, wich may be allocated
+// - use `free_memory' as a pointer to memory, which may be allocated
 void *loader_alloc(uint64_t size, uint32_t align)
 {
-	(void)size;
-	(void)align;
-
-	uint8_t *loader_freemem;
-	(void)loader_freemem;
-
 	// LAB 2: Your code here:
 	//	Step 1: round loader_freemem up to be aligned properly
 	//	Step 2: save current value of loader_freemem as allocated chunk
 	//	Step 3: increase free_memory to record allocation
 	//	Step 4: return allocated loader_freemem
 
+	uint8_t *ret;
+	ret = (void *)ROUND_UP((uint32_t)free_memory, align);
+	free_memory = ret + size;
 
-
-	return NULL;
+	return ret;
 }
 
 // LAB2 Instruction:
@@ -124,8 +120,38 @@ void *loader_alloc(uint64_t size, uint32_t align)
 #define KERNEL_BASE_DISK_SECTOR 2048 // 1Mb
 int loader_read_kernel(uint64_t *kernel_entry_point)
 {
-	*kernel_entry_point = 0;
+	struct elf64_header *elf_header = loader_alloc(sizeof(*elf_header), PAGE_SIZE);
 
+	if (disk_io_read_segment((uint32_t)elf_header, ATA_SECTOR_SIZE, KERNEL_BASE_DISK_SECTOR) != 0)
+	{
+		terminal_printf("Error: Can not read elf header");
+		return -1;
+	}
+
+	if (elf_header->e_magic != ELF_MAGIC)
+	{	
+		terminal_printf("Error: Invalid elf format, got %u instead of %u", elf_header->e_magic, ELF_MAGIC);
+		return -1;
+	}
+
+	for (struct elf64_program_header *p = ELF64_PHEADER_FIRST(elf_header); p < ELF64_PHEADER_LAST(elf_header); p++)
+	{
+		// Manually truncate high address part. This is needed to make mapping [KERNBASE; KERNBASE+FREEMEM) -> [0; FREEMEM) valid
+		p->p_va &= 0xFFFFFFFFull;		 // virtual address in memory
+
+		uint32_t lba = (p->p_offset / ATA_SECTOR_SIZE) + KERNEL_BASE_DISK_SECTOR;
+		if (disk_io_read_segment(p->p_va, p->p_memsz, lba) != 0)
+		{
+			terminal_printf("Error: Can not read segment %u", lba);
+			return -1;
+		}
+
+		if (PADDR(free_memory) < PADDR(p->p_va + p->p_memsz))
+			// Shift `free_memory'. So `loader_alloc()' will return free memory areas after this function
+			free_memory = (uint8_t *)(uintptr_t)(p->p_va + p->p_memsz);
+	}
+
+	*kernel_entry_point = elf_header->e_entry;
 	return 0;
 }
 
@@ -135,14 +161,21 @@ int loader_read_kernel(uint64_t *kernel_entry_point)
 #define MEMORY_TYPE_FREE 1
 void loader_detect_memory(struct bios_mmap_entry *mm, uint32_t cnt)
 {
-	(void)mm;
-	(void)cnt;
-
 	max_physical_address = 0;
-	pages_cnt = 0;
 
-	terminal_printf("Available memory: %u Kb (%u pages)\n",
-			(uint32_t)(max_physical_address / 1024), (uint32_t)pages_cnt);
+	for (uint32_t i = 0; i < cnt; i++)
+	{
+		if (mm[i].type != MEMORY_TYPE_FREE)
+			continue;
+		if (mm[i].base_addr + mm[i].addr_len < max_physical_address)
+			continue;
+
+		max_physical_address = mm[i].base_addr + mm[i].addr_len;
+	}
+
+	pages_cnt = ROUND_DOWN(max_physical_address, PAGE_SIZE) / PAGE_SIZE;
+
+	terminal_printf("Available memory: %u Kb (%u pages)\n", (uint32_t)(max_physical_address / 1024), (uint32_t)pages_cnt);
 }
 
 int loader_init_memory(struct bios_mmap_entry *mm, uint32_t cnt)

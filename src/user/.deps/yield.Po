@@ -1,8 +1,8 @@
-yield.o: yield.c /home/sa/Desktop/AnnOSTemp/src/user/syscall.h \
+yield.o: yield.c /home/sa/Desktop/devOS/src/user/syscall.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h
 
-/home/sa/Desktop/AnnOSTemp/src/user/syscall.h:
+/home/sa/Desktop/devOS/src/user/syscall.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
 

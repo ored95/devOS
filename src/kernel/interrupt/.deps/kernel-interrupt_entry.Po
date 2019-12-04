@@ -1,22 +1,22 @@
 interrupt/kernel-interrupt_entry.o: interrupt/interrupt_entry.S \
  /usr/include/stdc-predef.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/interrupt/apic.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/interrupt/interrupt.h \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/syscall.h
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h \
+ /home/sa/Desktop/devOS/src/kernel/misc/gdt.h \
+ /home/sa/Desktop/devOS/src/kernel/interrupt/apic.h \
+ /home/sa/Desktop/devOS/src/kernel/interrupt/interrupt.h \
+ /home/sa/Desktop/devOS/src/stdlib/syscall.h
 
 /usr/include/stdc-predef.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h:
+/home/sa/Desktop/devOS/src/kernel/misc/gdt.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/interrupt/apic.h:
+/home/sa/Desktop/devOS/src/kernel/interrupt/apic.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/interrupt/interrupt.h:
+/home/sa/Desktop/devOS/src/kernel/interrupt/interrupt.h:
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/syscall.h:
+/home/sa/Desktop/devOS/src/stdlib/syscall.h:

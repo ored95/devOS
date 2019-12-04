@@ -1,28 +1,28 @@
 console/libkernel64_a-terminal.o: console/terminal.c \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/string.h \
+ /home/sa/Desktop/devOS/src/stdlib/string.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h \
+ /home/sa/Desktop/devOS/src/stdlib/assert.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/console/terminal.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/string.h:
+/home/sa/Desktop/devOS/src/stdlib/string.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h:
+/home/sa/Desktop/devOS/src/stdlib/assert.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h:
+/home/sa/Desktop/devOS/src/kernel/lib/console/terminal.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h:

@@ -1,10 +1,10 @@
 loader-long_mode.o: long_mode.S \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h
+ /home/sa/Desktop/devOS/src/kernel/misc/gdt.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h:
+/home/sa/Desktop/devOS/src/kernel/misc/gdt.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h:

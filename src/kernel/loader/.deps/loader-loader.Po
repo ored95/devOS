@@ -1,31 +1,31 @@
-loader-loader.o: loader.c /home/sa/Desktop/AnnOSTemp/src/stdlib/string.h \
+loader-loader.o: loader.c /home/sa/Desktop/devOS/src/stdlib/string.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/disk/ata.h \
+ /home/sa/Desktop/devOS/src/stdlib/assert.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/disk/ata.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint-gcc.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/map.h \
- /home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/map.h \
+ /home/sa/Desktop/devOS/src/stdlib/queue.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h \
+ /home/sa/Desktop/devOS/src/kernel/lib/console/terminal.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/asm.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/cpu.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/task.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/elf.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/misc/util.h \
- /home/sa/Desktop/AnnOSTemp/src/kernel/loader/config.h
+ /home/sa/Desktop/devOS/src/kernel/asm.h \
+ /home/sa/Desktop/devOS/src/kernel/cpu.h \
+ /home/sa/Desktop/devOS/src/kernel/task.h \
+ /home/sa/Desktop/devOS/src/kernel/misc/gdt.h \
+ /home/sa/Desktop/devOS/src/kernel/misc/elf.h \
+ /home/sa/Desktop/devOS/src/kernel/misc/util.h \
+ /home/sa/Desktop/devOS/src/kernel/loader/config.h
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/string.h:
+/home/sa/Desktop/devOS/src/stdlib/string.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h:
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/assert.h:
+/home/sa/Desktop/devOS/src/stdlib/assert.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/disk/ata.h:
+/home/sa/Desktop/devOS/src/kernel/lib/disk/ata.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h:
 
@@ -33,28 +33,28 @@ loader-loader.o: loader.c /home/sa/Desktop/AnnOSTemp/src/stdlib/string.h \
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdbool.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/map.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/map.h:
 
-/home/sa/Desktop/AnnOSTemp/src/stdlib/queue.h:
+/home/sa/Desktop/devOS/src/stdlib/queue.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/mmu.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/mmu.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/memory/layout.h:
+/home/sa/Desktop/devOS/src/kernel/lib/memory/layout.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/lib/console/terminal.h:
+/home/sa/Desktop/devOS/src/kernel/lib/console/terminal.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/asm.h:
+/home/sa/Desktop/devOS/src/kernel/asm.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/cpu.h:
+/home/sa/Desktop/devOS/src/kernel/cpu.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/task.h:
+/home/sa/Desktop/devOS/src/kernel/task.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/gdt.h:
+/home/sa/Desktop/devOS/src/kernel/misc/gdt.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/elf.h:
+/home/sa/Desktop/devOS/src/kernel/misc/elf.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/misc/util.h:
+/home/sa/Desktop/devOS/src/kernel/misc/util.h:
 
-/home/sa/Desktop/AnnOSTemp/src/kernel/loader/config.h:
+/home/sa/Desktop/devOS/src/kernel/loader/config.h:
