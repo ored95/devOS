@@ -190,7 +190,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=3
+COMMON_CPPFLAGS = -DLAB=6
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -280,12 +280,12 @@ AM_CPPFLAGS = -I${abs_top_srcdir}
 SOURCES = memory/map.c disk/ata.c console/terminal.c
 libkernel32_a_SOURCES = ${SOURCES}
 libkernel32_a_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32
-libkernel32_a_CPPFLAGS = -DLAB=3 ${AM_CPPFLAGS} \
+libkernel32_a_CPPFLAGS = -DLAB=6 ${AM_CPPFLAGS} \
 			 -DKERNEL_BASE=0xFFFFFFF800000000 -DVADDR_BASE=0
 
 libkernel64_a_SOURCES = ${SOURCES}
 libkernel64_a_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m64 -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2
-libkernel64_a_CPPFLAGS = -DLAB=3 ${AM_CPPFLAGS} \
+libkernel64_a_CPPFLAGS = -DLAB=6 ${AM_CPPFLAGS} \
 			 -DVADDR_BASE=0xFFFFFFF800000000 -DKERNEL_BASE=0xFFFFFFF800000000
 
 all: all-am

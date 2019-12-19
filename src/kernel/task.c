@@ -26,6 +26,10 @@ void task_init(void)
 	memset(cpu->task, 0, sizeof(*cpu->task));
 
 	// LAB6 Instruction: initialize tasks list, and mark them as free
+	for (int32_t i = TASK_MAX_CNT-1; i >= 0; i--) {
+		LIST_INSERT_HEAD(&free_tasks, &tasks[i], free_link);
+		tasks[i].state = TASK_STATE_FREE;
+	}
 }
 
 void task_list(void)
@@ -46,6 +50,20 @@ void task_list(void)
 // - don't allow destroy kernel thread (check privelege level)
 void task_kill(task_id_t task_id)
 {
+	for (uint32_t i = 0; i < TASK_MAX_CNT; i++) {
+		if (tasks[i].id != task_id)
+			continue;
+		
+		if (tasks[i].state != TASK_STATE_RUN &&
+		    tasks[i].state != TASK_STATE_READY)
+			continue;
+
+		if ((tasks[i].context.cs & GDT_DPL_U) == 0)		// if bit PVL is supervisor
+			return terminal_printf("error: killing kernel tasks is forbidden\n");
+
+		return task_destroy(&tasks[i]);
+	}
+
 	terminal_printf("Can't kill task `%d': no such task\n", task_id);
 }
 
@@ -56,31 +74,38 @@ struct task *task_new(const char *name)
 	struct page *pml4_page;
 	struct task *task;
 
-	task = LIST_FIRST(&free_tasks);
+	task = LIST_FIRST(&free_tasks);		// look up at free tasks table
 	if (task == NULL) {
 		terminal_printf("Can't create task `%s': no more free tasks\n", name);
 		return NULL;
 	}
 
-	LIST_REMOVE(task, free_link);
+	LIST_REMOVE(task, free_link);		// create link between prev and current
 	memset(task, 0, sizeof(*task));
 
 	strncpy(task->name, name, sizeof(task->name));
 
-	task->id = ++last_task_id;
-	task->state = TASK_STATE_DONT_RUN;
+	task->id = ++last_task_id;			// task.id = prev + 1
+	task->state = TASK_STATE_DONT_RUN;	// save state to DONT_RUN
 
-	if ((pml4_page = page_alloc()) == NULL) {
+	if ((pml4_page = page_alloc()) == NULL) {	// check memory allocation
 		terminal_printf("Can't create task `%s': no memory for new pml4\n", name);
 		return NULL;
 	}
-	page_incref(pml4_page);
+	page_incref(pml4_page);		// increment reference of struct page (ref != no free)
 
 	// LAB6 instruction:
 	// - setup `task->pml4'
 	// - clear it
 	// - initialize kernel space part of `task->pml4'
-	(void)kernel_pml4;
+	task->pml4 = page2kva(pml4_page);	// setup PML4 to VADDR(page2pa(pml4_page))
+
+	// clear PML4
+	memset(task->pml4, 0, PAGE_SIZE);
+
+	// Kernel space is equal for each task
+	memcpy(&task->pml4[PML4_IDX(USER_TOP)], &kernel_pml4[PML4_IDX(USER_TOP)],
+	       PAGE_SIZE - PML4_IDX(USER_TOP)*sizeof(pml4e_t));
 
 	return task;
 }
@@ -99,9 +124,9 @@ void task_destroy(struct task *task)
 	// We must be inside `task' address space. Because we use
 	// virtual address to modify page table. This is needed to
 	// avoid any problems when killing forked process.
-	uint64_t old_cr3 = rcr3();
+	uint64_t old_cr3 = rcr3();				// get rc3: movq rc3, value
 	if (old_cr3 != PADDR(task->pml4)) {
-		lcr3(PADDR(task->pml4));
+		lcr3(PADDR(task->pml4));			// save rc3: movq value, rc3
 	}
 
 	// remove all mapped pages from current task
@@ -130,19 +155,19 @@ void task_destroy(struct task *task)
 					if ((pte[l] & PTE_P) == 0)
 						continue;
 
-					page_decref(pa2page(PTE_ADDR(pte[l])));
+					page_decref(pa2page(PTE_ADDR(pte[l])));		// decrease page table entry reference
 				}
 
 				pde[k] = 0;
-				page_decref(pa2page(pte_pa));
+				page_decref(pa2page(pte_pa));	// decrease table entry page reference
 			}
 
 			pdpe[j] = 0;
-			page_decref(pa2page(pde_pa));
+			page_decref(pa2page(pde_pa));		// decrease table directory entry reference
 		}
 
 		task->pml4[i] = 0;
-		page_decref(pa2page(pdpe_pa));
+		page_decref(pa2page(pdpe_pa));			// decrease PML4 reference
 	}
 
 	// Reload cr3, because it may be reused after `page_decref'
@@ -157,10 +182,10 @@ void task_destroy(struct task *task)
 	}
 
 	page_decref(pa2page(PADDR(task->pml4)));
-	task->pml4 = NULL;
+	task->pml4 = NULL;			// pointer to free
 
 	LIST_INSERT_HEAD(&free_tasks, task, free_link);
-	task->state = TASK_STATE_FREE;
+	task->state = TASK_STATE_FREE;		// mark as FREE
 
 	terminal_printf("task [%d] has been destroyed\n", task->id);
 }
@@ -169,18 +194,34 @@ void task_destroy(struct task *task)
 // - allocate space (use `page_insert')
 // - copy `binary + ph->p_offset' into `ph->p_va'
 // - don't forget to initialize bss (diff between `memsz and filesz')
-__attribute__((unused))
+
+// __attribute__((unused))		/* deleting */
 static int task_load_segment(struct task *task, const char *name,
 			     uint8_t *binary, struct elf64_program_header *ph)
 {
 	uint64_t va = ROUND_DOWN(ph->p_va, PAGE_SIZE);
 	uint64_t size = ROUND_UP(ph->p_memsz, PAGE_SIZE);
 
-	(void)va;
-	(void)size;
-	(void)name;
-	(void)task;
-	(void)binary;
+	// Allocate space for segment
+	for (uint64_t i = 0; i < size; i += PAGE_SIZE) {
+		struct page *page = page_alloc();
+
+		if (page == NULL) {
+			terminal_printf("Can't load `%s': no more free pages\n", name);
+			return -1;
+		}
+
+		if (page_insert(task->pml4, page, va + i, PTE_U | PTE_W) != 0) {
+			terminal_printf("Can't load `%s': page_insert failed\n", name);
+			return -1;
+		}
+	}
+
+	// Load segment
+	memcpy((void *)ph->p_va, binary + ph->p_offset, ph->p_filesz);					// data segment
+
+	// init .bss
+	memset((void *)(ph->p_va + ph->p_filesz), 0, ph->p_memsz - ph->p_filesz);		// sizeof(segment in memory) - sizeof(segment in files)
 
 	return 0;
 }
@@ -197,11 +238,26 @@ static int task_load(struct task *task, const char *name, uint8_t *binary, size_
 	// LAB6 Instruction:
 	// - load all proram headers with type `load' (use `task_load_segment')
 	// - setup task `rip'
-	(void)task;
-	(void)name;
-	(void)size;
+	lcr3(PADDR(task->pml4));		// save cr3: movq value, cr3
+	for (struct elf64_program_header *ph = ELF64_PHEADER_FIRST(elf_header);
+	     ph < ELF64_PHEADER_LAST(elf_header); ph++) {
+		if (ph->p_type != ELF_PHEADER_TYPE_LOAD)			// check type of segment
+			continue;
+		if (ph->p_offset > size) {							// offset in file should not be bigger than input size
+			terminal_printf("Can't load task `%s': truncated binary\n", name);
+			goto cleanup;
+		}
+		if (task_load_segment(task, name, binary, ph) != 0)	// load segment
+			goto cleanup;
+	}
+
+	task->context.rip = elf_header->e_entry;				// save entry to rip
 
 	return 0;
+
+cleanup:
+	task_destroy(task);
+	return -1;
 }
 
 int task_create(const char *name, uint8_t *binary, size_t size)
@@ -209,16 +265,32 @@ int task_create(const char *name, uint8_t *binary, size_t size)
 	struct page *stack;
 	struct task *task;
 
-	if ((task = task_new(name)) == NULL)
+	if ((task = task_new(name)) == NULL)			// allocate memory
 		return -1;
 
-	if (task_load(task, name, binary, size) != 0)
+	if (task_load(task, name, binary, size) != 0)	// load segment place
 		goto cleanup;
 
 	// LAB6 Instruction:
 	// - allocate and map stack
 	// - setup segment registers (with proper privelege levels) and stack pointer
-	(void)stack;
+	if ((stack = page_alloc()) == NULL) {			// allocate memory for user stack
+		terminal_printf("Can't create `%s': no memory for user stack\n", name);
+		goto cleanup;
+	}
+	if (page_insert(task->pml4, stack, USER_STACK_TOP-PAGE_SIZE, PTE_U | PTE_W) != 0) {		// vitual address = USER_STACK_TOP-PAGE_SIZE, permition = U|W
+		terminal_printf("Can't create `%s': page_insert failed\n", name);
+		goto cleanup;
+	}
+
+	// save all segments
+	task->context.cs = GD_UT | GDT_DPL_U;
+	task->context.ds = GD_UD | GDT_DPL_U;
+	task->context.es = GD_UD | GDT_DPL_U;
+	task->context.ss = GD_UD | GDT_DPL_U;
+	task->context.rsp = USER_STACK_TOP;
+
+	task->state = TASK_STATE_READY;		// MAIN: set state as READY
 
 	return 0;
 
@@ -269,6 +341,7 @@ void task_run(struct task *task)
 	);
 }
 
+// Here using algorithm Round Rabin without priority
 void schedule(void)
 {
 	struct cpu_context *cpu = cpu_context();
@@ -279,8 +352,25 @@ void schedule(void)
 	// - load new `cr3'
 	// - setup `cpu' context
 	// - run new task
-	(void)cpu;
-	(void)next_task_idx;
+	for (uint32_t i = next_task_idx, j = 0; j < TASK_MAX_CNT; j++) {
+		// index process (task) is calculated by remaining to TASK_MAX_CNT (1024)
+		uint32_t idx = (i + j) % TASK_MAX_CNT;		
+
+		if (tasks[idx].state != TASK_STATE_READY) {
+			// We use only one processor, so only one task may in `RUN' state
+			assert(tasks[idx].state != TASK_STATE_RUN);
+			continue;
+		}
+
+		if (rcr3() != PADDR(tasks[idx].pml4))
+			lcr3(PADDR(tasks[idx].pml4));
+
+		cpu->task = &tasks[idx];
+		cpu->pml4 = cpu->task->pml4;
+
+		next_task_idx = idx + 1;
+		task_run(&tasks[idx]);
+	}
 
 	panic("no more tasks");
 }

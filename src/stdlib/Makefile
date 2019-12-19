@@ -187,7 +187,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=3
+COMMON_CPPFLAGS = -DLAB=6
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -277,10 +277,10 @@ AM_CPPFLAGS = -I${abs_top_srcdir}
 SOURCES = string.c stdlib.c
 libstd32_a_SOURCES = ${SOURCES}
 libstd32_a_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32
-libstd32_a_CPPFLAGS = -DLAB=3 ${AM_CPPFLAGS}
+libstd32_a_CPPFLAGS = -DLAB=6 ${AM_CPPFLAGS}
 libstd64_a_SOURCES = ${SOURCES}
 libstd64_a_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-libstd64_a_CPPFLAGS = -DLAB=3 ${AM_CPPFLAGS}
+libstd64_a_CPPFLAGS = -DLAB=6 ${AM_CPPFLAGS}
 all: all-am
 
 .SUFFIXES:

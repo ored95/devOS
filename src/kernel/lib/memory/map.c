@@ -64,7 +64,7 @@ struct page *pa2page(uint64_t addr)
 
 void *page2kva(struct page *p)
 {
-	return VADDR(page2pa(p));
+	return VADDR(page2pa(p));		// receive virtual address compatible to physical address of p
 }
 
 pte_t *mmap_lookup(pml4e_t *pml4, uint64_t va, bool create)

@@ -51,7 +51,7 @@
 })
 
 typedef uint64_t pml4e_t; // page map level 4 entry
-typedef uint64_t pdpe_t;  // page direcroty pointer entry
+typedef uint64_t pdpe_t;  // page directory pointer entry
 typedef uint64_t pde_t;   // page directory entry
 typedef uint64_t pte_t;   // page table entry
 #endif

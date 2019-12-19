@@ -46,7 +46,7 @@ struct task_context {
 	uint64_t cs: 16;
 	uint64_t padding1: 48;
 
-	uint64_t rflags;
+	uint64_t rflags;		// here rflags.IF = 0 (using INTERRUPT_GATE)
 	uint64_t rsp;
 
 	uint64_t ss: 16;
@@ -55,10 +55,10 @@ struct task_context {
 
 
 enum task_state {
-	TASK_STATE_FREE		= 0,
-	TASK_STATE_READY	= 1,
-	TASK_STATE_RUN		= 2,
-	TASK_STATE_DONT_RUN	= 3,
+	TASK_STATE_FREE		= 0,	// destroy to set up a new one
+	TASK_STATE_READY	= 1,	// ready is run
+	TASK_STATE_RUN		= 2,	// executing
+	TASK_STATE_DONT_RUN	= 3,	// waiting in schedule
 };
 
 typedef uint32_t task_id_t;
