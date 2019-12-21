@@ -233,7 +233,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=6
+COMMON_CPPFLAGS = -DLAB=8
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -332,7 +332,7 @@ kernel_SOURCES = kernel.c \
 		 interrupt/interrupt_entry.S
 
 kernel_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m64 -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2
-kernel_CPPFLAGS = -DLAB=6 -I$(abs_top_srcdir) \
+kernel_CPPFLAGS = -DLAB=8 -I$(abs_top_srcdir) \
 		  -DVADDR_BASE=0xFFFFFFF800000000 -DKERNEL_BASE=0xFFFFFFF800000000
 
 kernel_LDADD = $(abs_top_builddir)/stdlib/libstd64.a \

@@ -185,7 +185,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=6
+COMMON_CPPFLAGS = -DLAB=8
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -271,7 +271,7 @@ top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
 bootloader_SOURCES = boot.S main.c ../lib/disk/ata.c
-bootloader_CPPFLAGS = -DLAB=6 -I$(abs_top_srcdir)
+bootloader_CPPFLAGS = -DLAB=8 -I$(abs_top_srcdir)
 bootloader_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32 -Os
 bootloader_CCASFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32 -Os
 bootloader_LDFLAGS = -ggdb3 -Wl,--entry=boot_entry -Wl,-Ttext -Wl,0x7c00

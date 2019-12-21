@@ -227,7 +227,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=6
+COMMON_CPPFLAGS = -DLAB=8
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -314,7 +314,7 @@ top_builddir = ..
 top_srcdir = ..
 AM_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m64 -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2
 AM_LDFLAGS = -ggdb3 -T linker.ld -lgcc
-AM_CPPFLAGS = -DLAB=6 -D__USER__ -I$(abs_top_srcdir)
+AM_CPPFLAGS = -DLAB=8 -D__USER__ -I$(abs_top_srcdir)
 noinst_LIBRARIES = libcommon.a
 libcommon_a_SOURCES = entry.c syscall.c
 hello_bin_SOURCES = hello.c

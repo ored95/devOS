@@ -1,0 +1,13 @@
+# First terminal
+1. make labx (here: x is 3-8)
+2. make qemu-gdb
+
+# Second terminal
+1. gdb
+2. qemu
+3. c (continue)
+4. Wait for some seconds and pause it by (<CTRL> + C)
+5. debug-kernel
+6. set variable debug = false
+
+Now debug process is running..

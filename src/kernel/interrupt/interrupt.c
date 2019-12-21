@@ -278,7 +278,7 @@ void interrupt_init(void)
 	idt[INTERRUPT_VECTOR_DIV_BY_ZERO] = INTERRUPT_GATE(GD_KT, interrupt_handler_div_by_zero, 0, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_DEBUG] = INTERRUPT_GATE(GD_KT, interrupt_handler_debug, 0, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_NMI] = INTERRUPT_GATE(GD_KT, interrupt_handler_nmi, 0, IDT_DPL_S);
-	idt[INTERRUPT_VECTOR_BREAKPOINT] = INTERRUPT_GATE(GD_KT, interrupt_handler_breakpoint, 1, IDT_DPL_U);	// DPL User, using IST
+	idt[INTERRUPT_VECTOR_BREAKPOINT] = INTERRUPT_GATE(GD_KT, interrupt_handler_breakpoint, 1, IDT_DPL_U);		// DPL User, using IST
 	idt[INTERRUPT_VECTOR_OVERFLOW] = INTERRUPT_GATE(GD_KT, interrupt_handler_overflow, 0, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_BOUND_RANGE] = INTERRUPT_GATE(GD_KT, interrupt_handler_bound_range, 0, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_IVALID_OPCODE] = INTERRUPT_GATE(GD_KT, interrupt_handler_ivalid_opcode, 0, IDT_DPL_S);
@@ -295,7 +295,7 @@ void interrupt_init(void)
 	idt[INTERRUPT_VECTOR_SIMD_FP] = INTERRUPT_GATE(GD_KT, interrupt_handler_simd_fp, 0, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_SECURITY_EXCEPTION] = INTERRUPT_GATE(GD_KT, interrupt_handler_security_exception, 0, IDT_DPL_S);
 
-	// hardware interrupts
+	// hardware interrups
 	idt[INTERRUPT_VECTOR_TIMER] = INTERRUPT_GATE(GD_KT, interrupt_handler_timer, 1, IDT_DPL_S);
 	idt[INTERRUPT_VECTOR_KEYBOARD] = INTERRUPT_GATE(GD_KT, interrupt_handler_keyboard, 1, IDT_DPL_S);
 
@@ -307,8 +307,11 @@ void interrupt_init(void)
 
 	// Initialize tss
 	// Doesn't returnSS(&tss[j], sizeof(tss[j])-1, TYPE_AVAILABLE_TSS, TSS_DPL_S);
+	for (uint32_t idx = (GD_TSS >> 3), j = 0; j < CPU_MAX_CNT; idx += 2, j++) {
+		struct descriptor64 *gdt64_entry = (struct descriptor64 *)&gdt[idx];
+		*gdt64_entry = SEGMENT_TSS(&tss[j], sizeof(tss[j])-1, TYPE_AVAILABLE_TSS, TSS_DPL_S);
 	}
-
+	
 	// LAB4 Instruction: create and map interrupt stack and exception
 	// stack (use cpu->pml4)
 	for (uintptr_t addr = INTERRUPT_STACK_TOP - INTERRUPT_STACK_SIZE;

@@ -185,7 +185,7 @@ CCASFLAGS =
 CCDEPMODE = depmode=gcc3
 CFLAGS = 
 COMMON_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3
-COMMON_CPPFLAGS = -DLAB=6
+COMMON_CPPFLAGS = -DLAB=8
 COMMON_LDFLAGS = -ggdb3
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -272,7 +272,7 @@ top_builddir = ../..
 top_srcdir = ../..
 loader_CFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32
 loader_CCASFLAGS = -Wall -Wextra -Werror -std=gnu11 -ffreestanding -nostdlib -ggdb3 -m32
-loader_CPPFLAGS = -DLAB=6 -I${abs_top_srcdir} \
+loader_CPPFLAGS = -DLAB=8 -I${abs_top_srcdir} \
 		  -DKERNEL_BASE=${KERNEL_BASE} -DVADDR_BASE=0
 
 loader_LDADD = $(abs_top_builddir)/kernel/lib/libkernel32.a \
