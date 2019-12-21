@@ -123,11 +123,6 @@ void kernel_main(void)
 	extern uint8_t edata[], end[];
 	memset(edata, 0, end - edata);
 
-	bool debug = true;
-	while (debug == true) {
-		// wait, until someone change condition above
-	}
-
 	// Reset terminal
 	terminal_init();
 
